@@ -28,7 +28,6 @@ public class TextEventHandler extends KeyAdapter
             if(frame.getTitle().equals(frame.getDefaultTitle()))
             {
                 frame.setTitle(frame.getTitle() + "*");
-                System.out.println("test");
             }
             else
             {
