@@ -1,8 +1,8 @@
 package pl.milorys.notepad.listeners;
 
 import pl.milorys.notepad.FrameGetter;
-import pl.milorys.notepad.Notepad;
 import pl.milorys.notepad.NotepadFrame;
+import pl.milorys.notepad.toolbar.TopPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -22,5 +22,12 @@ public class NewContentEventHandler implements ActionListener
     {
         frame.setTitle(frame.getDefaultTitle());
         frame.getTextArea().setText(null);
+        NotepadFrame.fileChooser = null;
+        frame.getUndoManager().discardAllEdits();
+        frame.setEdited(false);
+        JButton undoButton = TopPanel.getUndoRedoButtons().getUndoButton();
+        undoButton.setEnabled(false);
+        JButton redoButton = TopPanel.getUndoRedoButtons().getRedoButton();
+        redoButton.setEnabled(false);
     }
 }

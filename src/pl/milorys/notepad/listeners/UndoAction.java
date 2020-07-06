@@ -1,33 +1,50 @@
 package pl.milorys.notepad.listeners;
 
-import pl.milorys.notepad.FrameGetter;
-import pl.milorys.notepad.NotepadFrame;
-
 import javax.swing.*;
 import javax.swing.undo.UndoManager;
-import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class UndoAction extends AbstractAction
+public class UndoAction extends UndoRedoAction
 {
-    private UndoManager manager;
-    private JTextArea textArea;
-    private NotepadFrame frame;
-
-    public UndoAction(String name, Icon icon)
+    public UndoAction(String name, Icon icon, UndoRedoButtons buttons, UndoRedoMenuItems items)
     {
-        frame = FrameGetter.getFrame();
-        textArea = frame.getTextArea();
-        manager = frame.getUndoManager();
-
-        putValue(Action.NAME, name);
-        putValue(Action.SMALL_ICON, icon);
+        super(name, icon, buttons, items);
     }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
+        UndoManager manager = getManager();
         manager.undo();
+
+        if(getButtons() != null)
+        {
+            if(!manager.canUndo())
+            {
+                JButton undoButton = getButtons().getUndoButton();
+                undoButton.setEnabled(false);
+            }
+
+            if (manager.canRedo())
+            {
+                JButton redoButton = getButtons().getRedoButton();
+                redoButton.setEnabled(true);
+            }
+        }
+
+        if(getItems() != null)
+        {
+            if(!manager.canUndo())
+            {
+                JMenuItem undoMenuItem = getItems().getUndoItem();
+                undoMenuItem.setEnabled(false);
+            }
+
+            if(manager.canRedo())
+            {
+                JMenuItem redoMenuItem = getItems().getRedoItem();
+                redoMenuItem.setEnabled(true);
+            }
+        }
     }
 }

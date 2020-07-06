@@ -5,6 +5,7 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import pl.milorys.notepad.FrameGetter;
 import pl.milorys.notepad.NotepadFrame;
+import pl.milorys.notepad.toolbar.BottomPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +22,6 @@ public class SettingsDialog extends JDialog
         super(owner);
         setModal(true);
         setTitle("Ustawienia");
-        //setSize(400, 400);
         setLayout(new FlowLayout());
 
         frame = FrameGetter.getFrame();
@@ -50,6 +50,7 @@ public class SettingsDialog extends JDialog
                 NotepadFrame.setNotepadTheme(index);
                 SwingUtilities.updateComponentTreeUI(SettingsDialog.this);
                 pack();
+                BottomPanel.getColorChooserButton().setBackground(frame.getTextArea().getForeground());
             }
         });
 

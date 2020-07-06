@@ -1,11 +1,9 @@
 package pl.milorys.notepad.listeners;
 
 import pl.milorys.notepad.FrameGetter;
-import pl.milorys.notepad.Notepad;
 import pl.milorys.notepad.NotepadFrame;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -15,13 +13,11 @@ import java.util.Scanner;
 public class OpenItemEventHandler implements ActionListener
 {
     private pl.milorys.notepad.NotepadFrame frame;
-    //private JFileChooser fileChooser;
     private JTextArea textArea;
 
     public OpenItemEventHandler()
     {
         frame = FrameGetter.getFrame();
-        //fileChooser = frame.getFileChooser();
         textArea = frame.getTextArea();
     }
 
@@ -32,7 +28,7 @@ public class OpenItemEventHandler implements ActionListener
         NotepadFrame.fileChooser.setFileFilter(frame.getFileFilter());
         if(NotepadFrame.fileChooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION)
         {
-            Scanner scanner = null;
+            Scanner scanner;
             File file = NotepadFrame.fileChooser.getSelectedFile();
             try
             {

@@ -45,30 +45,29 @@ public class FontEventHandler implements ActionListener
             CheckButton cb = (CheckButton) e.getSource();
             if(cb.getAttribute().equals("bold"))
             {
-
                 if(cb.isClicked())
                 {
-                    cb.setIcon(frame.prepareIcon("icon_bold_selected.png", 28));
-                    cb.setClicked(false);
+                    cb.setIcon(frame.prepareIcon("icon_bold_not_selected.png", 28));
                 }
                 else
                 {
-                    cb.setIcon(frame.prepareIcon("icon_bold_not_selected.png", 28));
-                    cb.setClicked(true);
+                    cb.setIcon(frame.prepareIcon("icon_bold_selected.png", 28));
                 }
+
+                cb.setClicked(!cb.isClicked());
             }
             if(cb.getAttribute().equals("italic"))
             {
                 if(cb.isClicked())
                 {
                     cb.setIcon(frame.prepareIcon("icon_italic_not_selected.png", 28));
-                    cb.setClicked(false);
                 }
                 else
                 {
                     cb.setIcon(frame.prepareIcon("icon_italic_selected.png", 28));
-                    cb.setClicked(true);
                 }
+
+                cb.setClicked(!cb.isClicked());
             }
         }
 

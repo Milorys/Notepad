@@ -1,6 +1,5 @@
 package pl.milorys.notepad.listeners;
 
-import pl.milorys.notepad.AttributeButton;
 import pl.milorys.notepad.FrameGetter;
 import pl.milorys.notepad.NotepadFrame;
 
@@ -66,7 +65,6 @@ public class SaveAsEventHandler implements ActionListener
 
             NotepadFrame.fileChooser = new JFileChooser();
             JFileChooser fc = NotepadFrame.fileChooser;
-            //NotepadFrame.fileChooser.setFileFilter(fileFilter);
             if(NotepadFrame.fileChooser.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION)
             {
                 saveFile();

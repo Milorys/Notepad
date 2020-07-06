@@ -4,6 +4,7 @@ import pl.milorys.notepad.AttributeButton;
 import pl.milorys.notepad.FrameGetter;
 import pl.milorys.notepad.NotepadFrame;
 import pl.milorys.notepad.listeners.*;
+import pl.milorys.notepad.menus.EditMenu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,10 +13,14 @@ public class TopPanel extends JPanel
 {
     private NotepadFrame frame;
     private NotepadToolBar notepadToolBar;
+    private JButton undoButton;
+    private JButton redoButton;
+    private static UndoRedoButtons urb;
 
     public TopPanel(NotepadToolBar notepadToolBar)
     {
         frame = FrameGetter.getFrame();
+        FrameGetter.setTopPanel(this);
         this.notepadToolBar = notepadToolBar;
 
         setLayout(new FlowLayout());
@@ -65,14 +70,36 @@ public class TopPanel extends JPanel
 
         add(new JSeparator());
 
-        JButton undoButton = new JButton(new UndoAction(null, frame.prepareIcon("icon_undo.png", 24)));
-        undoButton.setToolTipText("Cofnij");
+        //Undo i redo
+        undoButton = new JButton();
         undoButton.setPreferredSize(dim);
-        add(undoButton);
 
-        JButton redoButton = new JButton(new RedoAction(null, frame.prepareIcon("icon_redo.png", 24)));
-        redoButton.setToolTipText("Ponów");
+        redoButton = new JButton();
         redoButton.setPreferredSize(dim);
+
+        urb = new UndoRedoButtons(undoButton, redoButton);
+        undoButton.setAction(new UndoAction(null, frame.prepareIcon("icon_undo.png", 24), urb, EditMenu.getUndoRedoMenuItems()));
+        undoButton.setEnabled(false);
+        undoButton.setToolTipText("Cofnij");
+        redoButton.setAction(new RedoAction(null, frame.prepareIcon("icon_redo.png", 24), urb, EditMenu.getUndoRedoMenuItems()));
+        redoButton.setEnabled(false);
+        redoButton.setToolTipText("Ponów");
+        add(undoButton);
         add(redoButton);
+    }
+
+    public JButton getUndoButton()
+    {
+        return undoButton;
+    }
+
+    public JButton getRedoButton()
+    {
+        return redoButton;
+    }
+
+    public static UndoRedoButtons getUndoRedoButtons()
+    {
+        return urb;
     }
 }

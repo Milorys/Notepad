@@ -15,6 +15,7 @@ public class ProgramInfoDialog extends JDialog
         setModal(true);
         setTitle("O programie");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(owner);
         setLayout(new GridBagLayout());
 
         NotepadFrame frame = FrameGetter.getFrame();

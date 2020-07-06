@@ -22,14 +22,14 @@ public class BottomPanel extends JPanel
     private JComboBox<String> fonts;
     private CheckButton bold;
     private CheckButton italic;
-    //private JCheckBox lineWrap;
     private CheckButton lineWrap;
-    private JButton colorChooserButton;
+    private static JButton colorChooserButton;
 
     public BottomPanel(NotepadToolBar notepadToolBar)
     {
         this.notepadToolBar = notepadToolBar;
         this.frame = FrameGetter.getFrame();
+        FrameGetter.setBottomPanel(this);
 
         setLayout(new FlowLayout());
 
@@ -71,9 +71,6 @@ public class BottomPanel extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                lineWrap.setClicked(!lineWrap.isClicked());
-                frame.getTextArea().setLineWrap(!lineWrap.isClicked());
-
                 if(lineWrap.isClicked())
                 {
                     lineWrap.setIcon(frame.prepareIcon("icon_wrap-disabled.png", 28));
@@ -85,6 +82,8 @@ public class BottomPanel extends JPanel
                     lineWrap.setToolTipText("Zawijanie tekstu: włączony");
                 }
 
+                lineWrap.setClicked(!lineWrap.isClicked());
+                frame.getTextArea().setLineWrap(lineWrap.isClicked());
             }
         });
         add(lineWrap);
@@ -154,7 +153,7 @@ public class BottomPanel extends JPanel
         return fontSize;
     }
 
-    public JButton getColorChooserButton()
+    public static JButton getColorChooserButton()
     {
         return colorChooserButton;
     }

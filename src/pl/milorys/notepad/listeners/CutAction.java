@@ -4,7 +4,6 @@ import pl.milorys.notepad.FrameGetter;
 import pl.milorys.notepad.NotepadFrame;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class CutAction extends AbstractAction
