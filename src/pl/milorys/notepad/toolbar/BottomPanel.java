@@ -3,6 +3,7 @@ package pl.milorys.notepad.toolbar;
 import pl.milorys.notepad.CheckButton;
 import pl.milorys.notepad.FrameGetter;
 import pl.milorys.notepad.NotepadFrame;
+import pl.milorys.notepad.listeners.BackgroundColorEventHandler;
 import pl.milorys.notepad.listeners.ColorButtonEventHandler;
 import pl.milorys.notepad.listeners.FontEventHandler;
 
@@ -24,6 +25,7 @@ public class BottomPanel extends JPanel
     private CheckButton italic;
     private CheckButton lineWrap;
     private static JButton colorChooserButton;
+    private static JButton backgroundColorChooser;
 
     public BottomPanel(NotepadToolBar notepadToolBar)
     {
@@ -49,6 +51,14 @@ public class BottomPanel extends JPanel
         colorChooserButton.addActionListener(new ColorButtonEventHandler(colorChooserButton));
         colorChooserButton.setFocusPainted(true);
         add(colorChooserButton);
+
+        //Kolor tła
+        backgroundColorChooser = new JButton(frame.prepareIcon("icon_background_color.png", 18));
+        backgroundColorChooser.setToolTipText("Wybór koloru tła");
+        backgroundColorChooser.setPreferredSize(new Dimension(28, 28));
+        backgroundColorChooser.setBackground(frame.getTextArea().getBackground());
+        backgroundColorChooser.addActionListener(new BackgroundColorEventHandler(backgroundColorChooser));
+        add(backgroundColorChooser);
 
         bold = new CheckButton(null, "bold");
         bold.setToolTipText("Pogrubienie tekstu");
@@ -127,10 +137,11 @@ public class BottomPanel extends JPanel
     public void setDefaultFontSettings()
     {
         //Domyślne ustawienia przy wejściu
-        fonts.setSelectedIndex(0);
+        fonts.setSelectedIndex(3);
         fontSize.setSelectedIndex(3);
         Font font = new Font(fonts.getItemAt(fonts.getSelectedIndex()), Font.PLAIN, fontSize.getItemAt(fontSize.getSelectedIndex()));
         frame.getTextArea().setFont(font);
+        frame.getLineCounter().setFont(font);
     }
 
     public CheckButton getBold()

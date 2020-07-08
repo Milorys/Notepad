@@ -24,8 +24,15 @@ public class OpenItemEventHandler implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
+        File currentFile = null;
+        if (NotepadFrame.fileChooser != null && NotepadFrame.fileChooser.getSelectedFile() != null)
+        {
+            currentFile = NotepadFrame.fileChooser.getSelectedFile();
+        }
+
         NotepadFrame.fileChooser = new JFileChooser();
         NotepadFrame.fileChooser.setFileFilter(frame.getFileFilter());
+
         if(NotepadFrame.fileChooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION)
         {
             Scanner scanner;
@@ -38,11 +45,16 @@ public class OpenItemEventHandler implements ActionListener
                     textArea.append(scanner.nextLine() + "\n");
                 }
                 frame.setTitle(frame.getDefaultTitle() + " | " + file.getName());
+                frame.getLineCounter().updateLineCounter();
             }
             catch (FileNotFoundException fileNotFoundException)
             {
                 fileNotFoundException.printStackTrace();
             }
+        }
+        else
+        {
+            NotepadFrame.fileChooser.setSelectedFile(currentFile);
         }
     }
 }

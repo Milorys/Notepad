@@ -23,13 +23,9 @@ public class ProgramInfoDialog extends JDialog
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
 
-        URL url = getClass().getClassLoader().getResource("Milorys.png");
-        Image img = new ImageIcon(url).getImage();
-        Image newImage = img.getScaledInstance(100,100, 4);
-        Icon icon = new ImageIcon(newImage);
-
         JLabel authorImage = new JLabel();
-        authorImage.setIcon(icon);
+        authorImage.setIcon(frame.prepareIcon("Milorys.png", 100));
+        authorImage.setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
         gbc.gridy = 0;
         add(authorImage, gbc);
 

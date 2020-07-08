@@ -54,4 +54,9 @@ public abstract class UndoRedoAction extends AbstractAction
     {
         return manager;
     }
+
+    public void setButtons(UndoRedoButtons buttons)
+    {
+        this.buttons = buttons;
+    }
 }

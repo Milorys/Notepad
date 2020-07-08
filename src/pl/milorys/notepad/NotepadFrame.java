@@ -20,6 +20,7 @@ public class NotepadFrame extends JFrame
     private final int TEXT_COLUMNS = 20;
     private final String defaultTitle = "Notatnik (egzemplarz testowy)";
     private JTextArea textArea;
+    private LineCounter lineCounter;
     public static JFileChooser fileChooser = null;
     private FileNameExtensionFilter fileFilter;
     private JPanel toolbarPanel = new JPanel();
@@ -54,10 +55,21 @@ public class NotepadFrame extends JFrame
         //Filtr rozszerzeń
         fileFilter = new FileNameExtensionFilter("Pliki tekstowe", "txt");
 
+        //Panel pola tekstowego
+        JPanel textFieldPanel = new JPanel();
+        textFieldPanel.setLayout(new BorderLayout());
+
         //Pole tekstowe
         textArea = new JTextArea(TEXT_ROWS, TEXT_COLUMNS);
         textArea.addKeyListener(new TextEventHandler());
-        JScrollPane scrollPane = new JScrollPane(textArea);
+
+        //Licznik linii
+        lineCounter = new LineCounter(textArea);
+
+        textFieldPanel.add(lineCounter, BorderLayout.WEST);
+        textFieldPanel.add(textArea, BorderLayout.CENTER);
+        textFieldPanel.setBorder(BorderFactory.createEtchedBorder());
+        JScrollPane scrollPane = new JScrollPane(textFieldPanel);
 
         manager = new UndoManager();
         textArea.getDocument().addUndoableEditListener(manager);
@@ -137,6 +149,11 @@ public class NotepadFrame extends JFrame
     public JTextArea getTextArea()
     {
         return textArea;
+    }
+
+    public LineCounter getLineCounter()
+    {
+        return lineCounter;
     }
 
     public String getDefaultTitle()

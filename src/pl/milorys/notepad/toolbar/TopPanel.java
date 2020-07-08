@@ -41,12 +41,14 @@ public class TopPanel extends JPanel
 
         AttributeButton saveButton = new AttributeButton(frame.prepareIcon("icon_save_file.png", 24), "save");
         saveButton.setToolTipText("Zapisz");
+        saveButton.setActionCommand("Zapisz");
         saveButton.addActionListener(new SaveAsEventHandler());
         saveButton.setPreferredSize(dim);
         add(saveButton);
 
         AttributeButton saveAsButton = new AttributeButton(frame.prepareIcon("icon_save_file_as.png", 24), "save_as");
         saveAsButton.setToolTipText("Zapisz jako");
+        saveAsButton.setActionCommand("Zapisz jako");
         saveAsButton.addActionListener(new SaveAsEventHandler());
         saveAsButton.setPreferredSize(dim);
         add(saveAsButton);

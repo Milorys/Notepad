@@ -24,10 +24,10 @@ public class EditMenu extends JMenu
 
         urmi = new UndoRedoMenuItems(undoItem, redoItem);
 
-        undoItem.setAction(new UndoAction("Cofnij", frame.prepareIcon("icon_undo.png", 16), TopPanel.getUndoRedoButtons(), urmi));
+        undoItem.setAction(new UndoAction("Cofnij", frame.prepareIcon("icon_undo.png", 16), null, urmi));
         undoItem.setEnabled(false);
         undoItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_MASK));
-        redoItem.setAction(new RedoAction("Ponów", frame.prepareIcon("icon_redo.png", 16), TopPanel.getUndoRedoButtons(), urmi));
+        redoItem.setAction(new RedoAction("Ponów", frame.prepareIcon("icon_redo.png", 16), null, urmi));
         redoItem.setEnabled(false);
         add(undoItem);
         add(redoItem);

@@ -108,5 +108,6 @@ public class FontEventHandler implements ActionListener
 
         Font font = new Font(fonts.getItemAt(fonts.getSelectedIndex()), mode, size);
         frame.getTextArea().setFont(font);
+        frame.getLineCounter().setFont(new Font(fonts.getItemAt(fonts.getSelectedIndex()), Font.PLAIN, size));
     }
 }

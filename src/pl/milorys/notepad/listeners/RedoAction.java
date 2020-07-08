@@ -1,8 +1,11 @@
 package pl.milorys.notepad.listeners;
 
+import pl.milorys.notepad.toolbar.TopPanel;
+
 import javax.swing.*;
 import javax.swing.undo.UndoManager;
 import java.awt.event.ActionEvent;
+import java.util.logging.Logger;
 
 public class RedoAction extends UndoRedoAction
 {
@@ -17,34 +20,33 @@ public class RedoAction extends UndoRedoAction
         UndoManager manager = getManager();
         manager.redo();
 
-        if(getButtons() != null)
+        if (getButtons() == null)
         {
-            if (!manager.canRedo())
-            {
-                JButton redoButton = getButtons().getRedoButton();
-                redoButton.setEnabled(false);
-            }
-
-            if (manager.canUndo())
-            {
-                JButton undoButton = getButtons().getUndoButton();
-                undoButton.setEnabled(true);
-            }
+            setButtons(TopPanel.getUndoRedoButtons());
         }
 
-        if (getItems() != null)
+        if (!manager.canRedo())
         {
-            if (!manager.canRedo())
-            {
-                JMenuItem redoItem = getItems().getRedoItem();
-                redoItem.setEnabled(false);
-            }
+            JButton redoButton = getButtons().getRedoButton();
+            redoButton.setEnabled(false);
+            Logger.getGlobal().info("REDO BUTTON : Wyłączono");
 
-            if(manager.canUndo())
-            {
-                JMenuItem undoItem = getItems().getUndoItem();
-                undoItem.setEnabled(true);
-            }
+            JMenuItem redoItem = getItems().getRedoItem();
+            redoItem.setEnabled(false);
+            Logger.getGlobal().info("REDO ITEM : Wyłączono");
         }
+
+        if (manager.canUndo())
+        {
+            JButton undoButton = getButtons().getUndoButton();
+            undoButton.setEnabled(true);
+            Logger.getGlobal().info("UNDO BUTTON : Włączono");
+
+            JMenuItem undoItem = getItems().getUndoItem();
+            undoItem.setEnabled(true);
+            Logger.getGlobal().info("REDO ITEM : Włączono");
+        }
+
+        getFrame().getLineCounter().updateLineCounter();
     }
 }

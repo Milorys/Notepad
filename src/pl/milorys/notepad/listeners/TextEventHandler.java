@@ -25,7 +25,7 @@ public class TextEventHandler extends KeyAdapter
         String titleLastChar = frame.getTitle().substring(index - 1, index);
         if (!titleLastChar.equals("*"))
         {
-            if(frame.getTitle().equals(frame.getDefaultTitle()))
+            if(!frame.getTitle().equals(frame.getDefaultTitle()))
             {
                 frame.setTitle(frame.getTitle() + "*");
             }
@@ -51,5 +51,7 @@ public class TextEventHandler extends KeyAdapter
             redoButton.setEnabled(true);
             redoMenuItem.setEnabled(true);
         }
+
+        frame.getLineCounter().updateLineCounter();
     }
 }
